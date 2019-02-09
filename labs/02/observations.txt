@@ -1,0 +1,21 @@
+
+Quentin Barnes
+CS 214 Lab 2
+Observation.Txt
+
+
+1) 	The lex.yy.c file sets up a switch to see if the inputed command is one of the 
+	ones from the .lex file.  If it is, it outputs the apropriate response and if 
+	it isnt, it outputs what was entered.  
+
+2) 	It recognizes a word or a number by what the starting value is.  If it is a 
+	number or a word.  It doesnt matter except for if it is a number first, then it 
+	will log if it becomes a word.  Also, spaces, dashes, and underscores reset the 
+	parser and lets it find more words and numbers.
+
+3) 	A terminal is a print statement because there is no other actions to be taken 
+	after it is printed.  Once the print statements are executed, it waits for a 
+	command.  The commands are the non termianls because they need to cue actions by 
+	the program.
+
+4)	The only strange thing i saw was it would crash if any numbers were entered.	

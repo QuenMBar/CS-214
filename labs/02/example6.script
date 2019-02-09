@@ -1,0 +1,99 @@
+
+Script started on Fri 08 Feb 2019 10:22:44 PM EST
+qmb2@gold17:~/Desktop/GitStuff/Git 363/CS-214/labs/02$ cat example6.lex 
+%{
+#include <stdio.h>
+#include <stdlib.h>           /* atoi() */
+#include <string.h>           /* strcmp() */
+#include "example6.tab.h"
+%}
+%%
+[0-9]+                  yylval = atoi(yytext); return NUMBER;
+heat                    return TOKHEAT;
+on|off                  yylval = !strcmp(yytext,"on"); return STATE;
+set                     return TOKSET;
+temperature             return TOKTEMPERATURE;
+humidity             	return TOKHUMIDITY;
+\n                      /* ignore end of line */;
+[ \t]+                  /* ignore whitespace */;
+%%qmb2@gold17:~/Desktop/GitStuff/Git 363/CS-214/labs/02$ cat example6.y
+%{
+#include <stdio.h>
+#include <string.h>
+
+/* declarations */
+int yylex (void);
+void yyerror (char const *);
+int yyparse(void);
+
+/* definitions */ 
+void yyerror(const char *str) {
+        fprintf(stderr,"error: %s\n",str);
+}
+ 
+int yywrap() {
+        return 1;
+} 
+ 
+int main() {
+        yyparse();
+} 
+
+%}
+
+%token NUMBER TOKHEAT STATE TOKSET TOKTEMPERATURE TOKHUMIDITY
+%%
+
+commands: /* empty */
+        | commands command
+        ;
+
+command:
+        heat_switch
+        | temperature_set
+	| humidity_set
+        ;
+
+heat_switch:
+        TOKHEAT STATE
+        {
+                if ($2) {  /* if STATE == 1 */
+                        printf("\tHeat turned on\n");
+                } else {
+                        printf("\tHeat turned off\n");
+                }
+        }
+        ;
+
+temperature_set: 
+        TOKSET TOKTEMPERATURE NUMBER
+        {
+                printf("\tTemperature set to %d\n",$3);
+        }
+        ;
+
+humidity_set: 
+        TOKSET TOKHUMIDITY NUMBER
+        {
+                printf("\tHumidity set to %d\n",$3);
+        }
+        ;qmb2@gold17:~/Desktop/GitStuff/Git 363/CS-214/labs/02$ flex example6.lex
+qmb2@gold17:~/Desktop/GitStuff/Git 363/CS-214/labs/02$ bison -d example6.y
+qmb2@gold17:~/Desktop/GitStuff/Git 363/CS-214/labs/02$ gcc lex.yy.c example6.tab 
+.c -o example6
+qmb2@gold17:~/Desktop/GitStuff/Git 363/CS-214/labs/02$ ex  ./example6
+set humidity to 45
+to	Humidity set to 45
+set temperature to 7
+to	Temperature set to 7
+heat on
+	Heat turned on
+heat off
+	Heat turned off
+se  set humidity to 64
+to	Humidity set to 64
+set temperature to 23
+to	Temperature set to 23
+qmb2@gold17:~/Desktop/GitStuff/Git 363/CS-214/labs/02$ exit
+
+Script done on Fri 08 Feb 2019 10:27:45 PM EST

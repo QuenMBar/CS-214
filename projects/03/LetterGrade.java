@@ -1,8 +1,8 @@
-/* YearCodes.java is a driver for function yearCode().
+/* LetterGrade.java is a driver for function letterGrade().
  *
  * Begun by: Prof. Adams, for CS 214 at Calvin College.
- * Completed by: Quentin Barnes
- * Date: Feb 15, 2019
+ * Completed and Edited by by: Quentin Barnes
+ * Date: Feb 23, 2019
  ****************************************************************/
 
 import java.util.Scanner;
@@ -18,11 +18,11 @@ public class LetterGrade {
    }
 
    /***************************************************************
-    * yearCode() converts an academic year into its integer code.
+    * letterGrade() converts a grade average to its coresponding letter grade
     *
-    * Receive: year, a string.
-    * PRE: year is one of {freshman, sophomore, junior, or senior}.
-    * Return: the integer code corresponding to year.
+    * Receive: average, an int
+    * PRE: average is <= 100 and >= 0
+    * Return: A letter grade A, B, C, D, or F
     */
 
     public static char letterGrade(int average){

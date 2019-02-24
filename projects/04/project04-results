@@ -1,0 +1,229 @@
+Script started on Sat 23 Feb 2019 08:23:26 PM EST
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ cat NLoop.java
+/* NLoop.java computes the factorial of a given number..
+ *
+ * Input: n, an int.
+ * PRE: n >= 2.
+ * Output: The factorial of the inputed number
+ * Begun by: Nelesen, for CS 214 at Calvin College.
+ * Completed and edited by: Quentin Barnes on Feb 23, 2019
+ ********************************************************/
+import java.util.Scanner; 		// Get input
+
+class NLoop{
+
+  public static void main(String[] args){
+    Scanner keyboard = new Scanner(System.in);
+    System.out.println("To compute n!, enter n: ");
+    int n;
+    n = keyboard.nextInt();
+
+    System.out.println(n + "! = " + nLoop(n));
+
+  }
+
+  public static double nLoop(int n) {
+    double answer = 1.0;
+    for (int i = 2; i <= n; i++) {
+      answer *= i;
+    }
+    return answer;
+  }
+}
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ javac -deprecation NLoop.java
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ java Nl Loop. 
+To compute n!, enter n: 
+5
+5! = 120.0
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ java NLoop
+To compute n!, enter n: 
+8
+8! = 40320.0
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ java NLoop
+To compute n!, enter n: 
+10
+10! = 3628800.0
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ java NLoop
+To compute n!, enter n: 
+25
+25! = 1.5511210043330986E25
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ exit
+
+Script done on Sat 23 Feb 2019 08:24:34 PM EST
+Script started on Sat 23 Feb 2019 08:24:47 PM EST
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ cat n_loop.adb
+-- n_loop.adb computes the factorial of a given number.
+--
+-- Input: n, an int.
+-- Precondition: n >= 2.
+-- Output: The factorial of the inputed number
+--
+-- Begun by: Prof. Adams, for CS 214 at Calvin College.
+-- Completed and edited by: Quentin Barnes on Feb 23, 2019
+--------------------------------------------------------------
+
+with Ada.Text_IO, Ada.Float_Text_IO, Ada.Integer_Text_IO, Ada.Numerics.Elementary_Functions;
+use  Ada.Text_IO, Ada.Float_Text_IO, Ada.Integer_Text_IO, Ada.Numerics.Elementary_Functions;
+
+procedure n_loop is
+
+   answer : Float;
+   n : Integer;
+   function nLoop(n: in Integer) return Float is 
+   begin
+      answer := 1.0;
+      for i in 2..n loop
+         answer := answer * Float(i);
+      end loop;
+      return answer;
+   end nLoop;
+
+begin                                           -- Prompt for input
+   Put_Line("To compute n!, enter n: ");
+   Get(n);
+   Put(n);
+   Put("! = ");
+   Put( nLoop(n) );
+   Put_Line(" ");
+end n_loop;
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ gnatmake n_loop
+gcc-5 -c n_loop.adb
+gnatbind-5 -x n_loop.ali
+gnatlink-5 n_loop.ali
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ ./n_loop 
+To compute n!, enter n: 
+5
+          5! =  1.20000E+02 
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ ./n_loop 
+To compute n!, enter n: 
+8
+          8! =  4.03200E+04 
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ ./n_loop 
+To compute n!, enter n: 
+10
+         10! =  3.62880E+06 
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ ./n_loop 
+To compute n!, enter n: 
+25
+         25! =  1.55112E+25 
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ exit
+
+Script done on Sat 23 Feb 2019 08:26:09 PM EST
+Script started on Sat 23 Feb 2019 08:30:35 PM EST
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04/clojure$ cat src/nLoop.clj 
+;;;; nLoop.clj computes the factorial of a given number..
+;;;;
+;;;; Input: n, an int.
+;;;; Precondition: n >= 2.
+;;;; Output: The factorial of the inputed number
+;;;;
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed and edited by: Quentin Barnes on Feb 23, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns nLoop)                                 ; name the program
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; nLoop() computes the factorial of a given number..
+;;; Receive: n, an int.
+;;; Precondition: n >= 2.
+;;; Output: The factorial of the inputed number
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; direct-recursive version
+
+(defn nLoop [i n answer]
+  (if (< i n)
+    (nLoop (+ i 1) n (* answer i))
+    (println n "! = " (* answer i))
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; -main is a 'driver' for the displayLogTable() functions.
+;;; Input: n
+;;; Output: The factorial of the inputed number
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn -main []
+ (print "To compute n!, enter n: ") (flush)
+ (let
+    [ n (int (read))] 
+    (println)
+    (nLoop 2 n 1.0)
+    (println)
+ )
+)
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04/clojure$ clojure -m nLoop
+To compute n!, enter n: 5
+
+5 ! =  120.0
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04/clojure$ clojure -m nLoop
+To compute n!, enter n: 8
+
+8 ! =  40320.0
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04/clojure$ clojure -m nLoop
+To compute n!, enter n: 10
+
+10 ! =  3628800.0
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04/clojure$ clojure -m nLoop
+2To compute n!, enter n: 5
+
+25 ! =  1.5511210043330986E25
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04/clojure$ exit
+
+Script done on Sat 23 Feb 2019 08:31:09 PM EST
+Script started on Sat 23 Feb 2019 08:26:24 PM EST
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ cat nLoop.rb 
+#! /usr/bin/ruby
+# nLoop.rb computes the factorial of a given number.
+#
+# Begun by: Prof. Adams, for CS 214 at Calvin College.
+# Completed and edited by: Quentin Barnes on Feb 23, 2019
+#
+# Input:  n, an int.
+# Precondition: n >= 2.
+# Output: The factorial of the inputed number
+
+def nLoop(n) 
+   answer = 1.0
+   for i in 2..n 
+      answer = answer * i
+
+   end
+   puts answer
+end
+
+if __FILE__ == $0
+   print "To compute n!, enter n: "
+   n = gets.to_i
+   
+   puts nLoop(n)
+end
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ ruby N nLoop.rb 
+To compute n!, enter n: 5
+120.0
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ ruby nLoop.rb 
+To compute n!, enter n: 8
+40320.0
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ ruby nLoop.rb 
+To compute n!, enter n: 10
+3628800.0
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ ruby nLoop.rb 
+To compute n!, enter n: 25
+1.5511210043330986e+25
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/04$ exit
+
+Script done on Sat 23 Feb 2019 08:27:24 PM EST

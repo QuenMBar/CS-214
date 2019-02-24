@@ -1,26 +1,22 @@
-;;;; year_codes.clj is a driver for function yearCode.
+;;;; letter_grade.clj is a driver for function letterGrade.
 ;;;;
-;;;; Input: An academic year, one of {freshman, sophomore,
-;;;;                                  junior, senior}.
-;;;; Output: The code for that academic year
-;;;;         (1, 2, 3, 4 for valid entries; 
-;;;;          0 for invalid entries).
+;;;; Input: average: an int that is <= 100 and >= 0
+;;;; Output: A letter grade A, B, C, D, or F
 ;;;;
-;;;; Usage: clojure -m year_codes
+;;;; Usage: clojure -m letter_grade
 ;;;;
 ;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
-;;;; Completed by: Quentin Barnes
-;;;; Date: Feb 15, 2019
+;;;; Completed and Edited by by: Quentin Barnes
+;;;; Date: Feb 23, 2019
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (ns letter_grade)                    ; name the program
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; yearCode() returns the code for a given academic year.
-;;; Receive: year, a string.
-;;; Precondition: year is one of 
-;;;   {freshman, sophomore, junior or senior}.
-;;; Return: the integer code corresponding to year.
+;;; letterGrade() returns the code for a given grade average.
+;;; Receive: average, an int.
+;;; Precondition: average is <= 100 and >= 0
+;;; Return: A letter grade A, B, C, D, or F
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; solution using the cond function
@@ -36,15 +32,15 @@
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Function -main() test-drives our yearCode() function.
-;;; Input: year: one of {freshman, sophomore, junior, or senior}.
-;;; Output: the code corresponding to year.
+;;; Function -main() test-drives our letterGrade() function.
+;;; Input: average: an int that is <= 100 and >= 0
+;;; Output: A letter grade A, B, C, D, or F
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn -main []
  (print "\nEnter your grade average: ") (flush)
  (let
     [ average (read-line) ]                ; read year (a string)
-    (println "Your average is: " (letterGrade average) )      ; display its code
+    (println "Your average is: " (letterGrade ( quot (Integer/parseInt average) 10) ) )      ; display its code
  )
 )
 

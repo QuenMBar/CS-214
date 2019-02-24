@@ -1,12 +1,12 @@
--- year_codes.adb converts academic year codes to corresponding years.
+-- letter_grade.adb converts a grade average to its coresponding letter grade.
 --
 -- Begun by: Dr. Adams, for CS 214 at Calvin College.
--- Completed by: Quentin Barnes
--- Date: Feb 15, 2019
+-- Completed and Edited by by: Quentin Barnes
+-- Date: Feb 23, 2019
 --
--- Input: year, a string
--- Precondition: year is one of "freshman", "sophomore", "junior", "senior"
--- Output: The year code (1, 2, 3 or 4) corresponding to year.
+-- Input: average, a int
+-- Precondition: average is <= 100 and >= 0
+-- Output: A letter grade A, B, C, D, or F
 ----------------------------------------------------
 
 with Ada.Text_IO, Ada.Integer_Text_IO;
@@ -14,7 +14,7 @@ use  Ada.Text_IO, Ada.Integer_Text_IO;
 
 procedure letter_grade is
 
-   averageInString : string(1..2) := "  ";
+   averageInString : string(1..3) := "   ";
    average : Integer;
    charsRead : Natural;
 
@@ -32,7 +32,7 @@ procedure letter_grade is
    end letterGrade;
 
 begin                                          
-   Put("Enter your academic year: ");           -- Prompt for input
+   Put("Enter your grade average: ");           -- Prompt for input
    Get_Line(averageInString, charsRead);                   -- Input
    average := Integer'Value(averageInString);
    Put( letterGrade(average) );                       -- Convert and output

@@ -1,0 +1,289 @@
+Script started on Sat 23 Feb 2019 05:36:44 PM EST
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ cat LetterGrade.java
+/* LetterGrade.java is a driver for function letterGrade().
+ *
+ * Begun by: Prof. Adams, for CS 214 at Calvin College.
+ * Completed and Edited by by: Quentin Barnes
+ * Date: Feb 23, 2019
+ ****************************************************************/
+
+import java.util.Scanner;
+
+public class LetterGrade {
+
+   public static void main(String[] args) {
+      Scanner keyboard = new Scanner(System.in);
+      System.out.println("\nEnter your grade average: "); // prompt
+
+      int average = Integer.parseInt(keyboard.next());      // read year
+      System.out.println(letterGrade(average)); // display its code
+   }
+
+   /***************************************************************
+    * letterGrade() converts a grade average to its coresponding letter grade
+    *
+    * Receive: average, an int
+    * PRE: average is <= 100 and >= 0
+    * Return: A letter grade A, B, C, D, or F
+    */
+
+    public static char letterGrade(int average){
+      switch (average / 10)
+      {
+         case 10: case 9:
+            return 'A';
+         case 8:
+            return 'B';
+         case 7:
+            return 'C';
+         case 6:
+            return 'D';
+         default:
+            return 'F';
+      }
+   }
+
+}
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ javac -deprecation Le tterGrade.java
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ java LetterGrade. 
+
+Enter your grade average: 
+100
+A
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ java LetterGrade95  
+
+Enter your grade average: 
+95
+A
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ java LetterGrade
+
+Enter your grade average: 
+81
+B
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ java LetterGrade
+
+Enter your grade average: 
+79
+C
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ java LetterGrade
+
+Enter your grade average: 
+60
+D
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ java LetterGrade
+
+Enter your grade average: 
+24
+F
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ exit
+
+Script done on Sat 23 Feb 2019 05:37:59 PM EST
+Script started on Sat 23 Feb 2019 05:40:52 PM EST
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ cat letter_grade.adb
+-- letter_grade.adb converts a grade average to its coresponding letter grade.
+--
+-- Begun by: Dr. Adams, for CS 214 at Calvin College.
+-- Completed and Edited by by: Quentin Barnes
+-- Date: Feb 23, 2019
+--
+-- Input: average, a int
+-- Precondition: average is <= 100 and >= 0
+-- Output: A letter grade A, B, C, D, or F
+----------------------------------------------------
+
+with Ada.Text_IO, Ada.Integer_Text_IO;
+use  Ada.Text_IO, Ada.Integer_Text_IO;
+
+procedure letter_grade is
+
+   averageInString : string(1..3) := "   ";
+   average : Integer;
+   charsRead : Natural;
+
+   function letterGrade(average: in Integer) return string is 
+   begin
+      case average/10 is
+         when 10    => return "A";
+         when 9    => return "A";
+         when 8    => return "B";
+         when 7    => return "C";
+         when 6    => return "D";
+  
+         when others => return "F";
+      end case;
+   end letterGrade;
+
+begin                                          
+   Put("Enter your grade average: ");           -- Prompt for input
+   Get_Line(averageInString, charsRead);                   -- Input
+   average := Integer'Value(averageInString);
+   Put( letterGrade(average) );                       -- Convert and output
+   New_Line;
+end letter_grade;
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ gnatmake letter_grade [Aqmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ gnatmake letter_grad[Ke
+gcc-5 -c letter_grade.adb
+gnatbind-5 -x letter_grade.ali
+gnatlink-5 letter_grade.ali
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ./letter_grade 
+Enter your grade average: 100
+A
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ./letter_grade 
+Enter your grade average: 95
+A
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ./letter_grade 
+Enter your grade average: 81
+B
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ./letter_grade 
+Enter your grade average: 79
+C
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ./letter_grade 
+Enter your grade average: 60
+D
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ./letter_grade 
+Enter your grade average: 24
+F
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ exit
+
+Script done on Sat 23 Feb 2019 05:42:00 PM EST
+Script started on Sat 23 Feb 2019 05:43:59 PM EST
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03/clojure$ cat src/lette r_grade.clj
+;;;; letter_grade.clj is a driver for function letterGrade.
+;;;;
+;;;; Input: average: an int that is <= 100 and >= 0
+;;;; Output: A letter grade A, B, C, D, or F
+;;;;
+;;;; Usage: clojure -m letter_grade
+;;;;
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed and Edited by by: Quentin Barnes
+;;;; Date: Feb 23, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns letter_grade)                    ; name the program
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; letterGrade() returns the code for a given grade average.
+;;; Receive: average, an int.
+;;; Precondition: average is <= 100 and >= 0
+;;; Return: A letter grade A, B, C, D, or F
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; solution using the cond function
+(defn letterGrade [average]
+  (cond
+    (= average 10)   "A"
+    (= average 9)    "A"
+    (= average 8)    "B"
+    (= average 7)    "C"
+    (= average 6)    "D"
+    :else            "F"
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Function -main() test-drives our letterGrade() function.
+;;; Input: average: an int that is <= 100 and >= 0
+;;; Output: A letter grade A, B, C, D, or F
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn -main []
+ (print "\nEnter your grade average: ") (flush)
+ (let
+    [ average (read-line) ]                ; read year (a string)
+    (println "Your average is: " (letterGrade ( quot (Integer/parseInt average) 10) ) )      ; display its code
+ )
+)
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03/clojure$ clojure -m le tter_grade
+
+Enter your grade average: 100
+Your average is:  A
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03/clojure$ clojure -m lettter_grade
+
+Enter your grade average: 95
+Your average is:  A
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03/clojure$ clojure -m lettter_grade
+
+Enter your grade average: 81
+Your average is:  B
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03/clojure$ clojure -m lettter_grade
+
+Enter your grade average: 79
+Your average is:  C
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03/clojure$ clojure -m lettter_grade
+
+Enter your grade average: 60
+Your average is:  D
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03/clojure$ clojure -m lettter_grade
+
+Enter your grade average: 24
+Your average is:  F
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03/clojure$ exit
+
+Script done on Sat 23 Feb 2019 05:45:20 PM EST
+Script started on Sat 23 Feb 2019 05:42:42 PM EST
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ cat letter_grade.rb
+#! /usr/bin/ruby
+# letter_grades.rb converts a grade average to its coresponding letter grade
+# Begun by: Dr. Nelesen, for CS 214 at Calvin College 
+# Completed and Edited by by: Quentin Barnes
+# Date: Feb 23, 2019
+################################################################
+
+# Input:  average, a int
+# Precondition: average is <= 100 and >= 0
+# Output: A letter grade A, B, C, D, or F
+
+def letterGrade(average) 
+    case average/10
+    when 10 then
+        puts "A"
+    when 9 then
+        puts "A"
+    when 8 then
+        puts "B"
+    when 7 then
+        puts "C"
+    when 6 then
+        puts "D"
+    else
+        puts "F"
+    end
+
+end
+
+
+if __FILE__ == $0
+   print "Enter your average grade: "
+   average = gets
+   print "Letter grade is: "
+   puts letterGrade(average.to_i)
+end
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ruby letter_grade.rb
+Enter your average grade: 100
+Letter grade is: A
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ruby letter_grade.rb
+Enter your average grade: 95
+Letter grade is: A
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ruby letter_grade.rb
+Enter your average grade: 81
+Letter grade is: B
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ruby letter_grade.rb
+Enter your average grade: 79
+Letter grade is: C
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ruby letter_grade.rb
+Enter your average grade: 60
+Letter grade is: D
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ ruby letter_grade.rb
+Enter your average grade: 24
+Letter grade is: F
+
+qmb2@gold27:~/Desktop/GitStuff/Git 363/CS-214/projects/03$ exit
+
+Script done on Sat 23 Feb 2019 05:43:34 PM EST

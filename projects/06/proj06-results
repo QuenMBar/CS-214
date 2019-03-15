@@ -1,0 +1,311 @@
+Script started on Thu 14 Mar 2019 08:17:04 PM EDT
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06$ cat array     Array_Processing.java 
+
+/* Array_Processing.java allows the user to enter an array and print the entered array
+ *
+ * Student Name: Quentin Barnes
+ * Date: 3/14/19
+ *
+ * Recive: the values of an array
+ * Output: the entered array
+ ***************************************************************/
+
+import java.util.Scanner;
+
+public class Array_Processing {
+  public static void main(String[] args) {
+    Scanner keyboard = new Scanner(System.in);
+
+    System.out.print("Enter the size of the array: ");
+    int theSize = keyboard.nextInt();
+
+    double theArray[] = new double[theSize];
+
+    readArray(theArray, theSize);
+
+    System.out.println("Enter the array entered is: ");
+    printArray(theArray, theSize);
+  }
+
+  /*
+   * printArray() is a function that prints an array that it is given based on the
+   * size it is given Recives: An array and its size
+   ************************************************************/
+
+  public static void printArray(double theArray[], int theSize) {
+    for (int i = 0; i < theSize; i++) {
+      System.out.println(theArray[i]);
+    }
+  }
+
+  /*
+   * readArray() is a function that lets the user enter values into an array
+   * Recives: An array and its size
+   **************************************************************/
+
+  public static void readArray(double anArray[], int itsSize) {
+    Scanner keyboard = new Scanner(System.in);
+    for (int i = 0; i < itsSize; i++) {
+      System.out.print("Enter value " + (i + 1) + ": ");
+      anArray[i] = keyboard.nextDouble();
+    }
+  }
+
+}
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06$ javac -deprecation Array_Processing.java 
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06$ java Array_Processing. 
+Enter the size of the array: 6
+Enter value 1: 3.52
+Enter value 2: 4.6
+Enter value 3: 7
+Enter value 4: 0.1
+Enter value 5: 4.1
+Enter value 6: 2
+Enter the array entered is: 
+3.52
+4.6
+7.0
+0.1
+4.1
+2.0
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06$ exit
+
+Script done on Thu 14 Mar 2019 08:18:32 PM EDT
+Script started on Thu 14 Mar 2019 08:18:42 PM EDT
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06$ cat array_processing.adb 
+--  array_processing.adb allows the user to enter an array and print the entered array
+
+--  Student Name: Quentin Barnes
+--  Date: 3/14/19
+
+--  Recive: the values of an array
+--  Output: the entered array
+-----------------------------------------------
+
+with Ada.Text_IO; use Ada.Text_IO;             -- Put(String)
+with Ada.Float_Text_IO; use Ada.Float_Text_IO; -- Put(Float)
+with Ada.Integer_Text_IO; use Ada.Integer_Text_IO; -- Get(Integer)
+
+procedure array_processing is
+
+-- Declare Vector type
+type Vector is array (Positive range <>) of Float;
+
+theSize : Positive;
+
+
+
+-- printArray() is a function that prints an array that it is given based on the
+-- size it is given 
+-- Recives: An array and its size
+
+procedure printArray( anArray: in Vector; anSize: in Integer ) is
+begin
+   for i in 1..anSize loop
+      Put(anArray(i));
+      Put_Line(" ");
+   end loop;
+end printArray;
+
+
+-- readArray() is a function that lets the user enter values into an array
+-- Recives: An array and its size
+procedure readArray( anArray: out Vector; anSize: in Integer ) is
+enteredVal: Float;
+begin
+   for i in 1..anSize loop
+      Put("Enter value ");
+      Put(i);
+      Put(": ");
+      Get(enteredVal);
+      anArray(i) := enteredVal;
+   end loop;
+end readArray;
+
+
+begin
+   Put("Enter the size of the array: ");
+   Get(theSize);
+
+   declare
+      theArray : Vector(1..theSize);
+
+   begin
+      readArray(theArray, theSize);
+
+
+      Put_Line("Enter the array entered is: ");
+      printArray(theArray, theSize);
+   end;
+end array_processing;
+
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06$ gnatmake array_processing.adb 
+gcc-5 -c array_processing.adb
+gnatbind-5 -x array_processing.ali
+gnatlink-5 array_processing.ali
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06$ ./array_processing 
+Enter the size of the array: 6
+Enter value           1: 3.52
+Enter value           2: 4.6
+Enter value           3: 7
+Enter value           4: 0.1
+Enter value           5: 41 .1
+Enter value           6: 2
+Enter the array entered is: 
+ 3.52000E+00 
+ 4.60000E+00 
+ 7.00000E+00 
+ 1.00000E-01 
+ 4.10000E+00 
+ 2.00000E+00 
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06$ exit
+
+Script done on Thu 14 Mar 2019 08:19:48 PM EDT
+Script started on Thu 14 Mar 2019 08:22:22 PM EDT
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06/clojure$ cat src/arrayprocessing.clj 
+;  arrayprocessing.clj allows the user to enter an array and print the entered array
+
+;  Student Name: Quentin Barnes
+;  Date: 3/14/19
+
+;  Recive: the values of an array
+;  Output: the entered array
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns arrayprocessing)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; readArray() is a function that lets the user enter values into an array
+; Recives: An array, its size, and the times its run
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn readArray [aVec, itsSize, i]
+  (if (<= i (- itsSize 1))
+    (let
+      [ theVal (double (read)) ]
+      (aset aVec i theVal)
+      (readArray aVec itsSize (+ i 1))
+    )
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; printArray() is a function that prints an array that it is given based on the
+; size it is given 
+; Recives: An array, its size, and the times its run
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   
+(defn printArray [aVec, itsSize, i]
+    (if (<= i (- itsSize 1))
+      (do 
+        (println (nth aVec i) ) (flush)
+        (printArray aVec itsSize (+ i 1))
+      )
+    )
+)
+
+(defn -main []
+
+  (print "\nEnter the size of the array: ") (flush)
+  (let
+    [ theSize (int (read)) ]
+
+    (def theArray (make-array Double/TYPE theSize))
+    
+    (println "Enter values: ")
+    (readArray theArray theSize 0)
+
+    (println "Enter the array entered is: ") (flush)
+    (printArray theArray theSize 0)
+  )
+)
+
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06/clojure$ clojure -m arrayprocessing
+
+Enter the size of the array: 6
+Enter values: 
+3.52
+4.6
+7
+0.1
+4.1
+2
+Enter the array entered is: 
+3.52
+4.6
+7.0
+0.1
+4.1
+2.0
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06/clojure$ exit
+
+Script done on Thu 14 Mar 2019 08:22:59 PM EDT
+Script started on Thu 14 Mar 2019 08:19:56 PM EDT
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06$ cat arrayProcessing.rb 
+#  arrayProcessing.rb allows the user to enter an array and print the entered array
+
+#  Student Name: Quentin Barnes
+#  Date: 3/14/19
+
+#  Recive: the values of an array
+#  Output: the entered array
+########################################################
+
+###############################################
+# readArray() is a function that lets the user enter values into an array
+# Recives: An array
+################################################
+
+def readArray(anArray)
+   for i in 0..anArray.size-1
+      anArray[i] = gets.to_f
+   end
+end
+
+###################################
+# printArray() is a function that prints an array that it is given based on the
+# size it is given 
+# Recives: An array
+####################################
+
+def printArray(anArray)
+  anArray.each{|val| puts val}
+end
+
+def main
+
+  puts "\nEnter the size of the array: \n"
+  theSize = gets.to_i
+
+  theArray = Array.new(theSize)
+  puts "Enter values: "
+  readArray(theArray)
+
+  puts "Enter the array entered is: "
+
+  printArray(theArray)
+end
+
+main
+
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06$ ruby arrayProcessing.rb 
+
+Enter the size of the array: 
+6
+Enter values: 
+3.52
+4.6
+7
+0.1
+4.1
+2
+Enter the array entered is: 
+3.52
+4.6
+7.0
+0.1
+4.1
+2.0
+qmb2@gold28:~/Desktop/GitStuff/Git 363/CS-214/projects/06$ exit
+
+Script done on Thu 14 Mar 2019 08:20:36 PM EDT

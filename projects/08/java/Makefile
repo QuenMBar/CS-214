@@ -1,10 +1,10 @@
-NameTester: Name.class NameTester.class
+TempTester: Tempature.class TempTester.class
 
-Name.class: Name.java
-	javac -deprecation Name.java
+Tempature.class: Tempature.java
+	javac -deprecation Tempature.java
 
-NameTester.class: NameTester.java
-	javac -deprecation NameTester.java
+TempTester.class: TempTester.java
+	javac -deprecation TempTester.java
 
 clean:
 	rm -f *.class *~ *# *.o

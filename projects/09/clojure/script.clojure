@@ -1,0 +1,139 @@
+Script started on Mon 06 May 2019 11:29:38 PM EDT
+qmb2@gold29:~/Desktop/GitStuff/Git 363/CS-214/projects/09/clojure$ cat src/find.clj 
+;; find.clj tests a function to search a list for a value.
+;;
+;; Output: four lists, and 
+;;          the results of calling a listSearch() function on them.
+;;
+;; Usage: clojure -m find
+;;
+;; Begun by: Dr. Adams, CS 214 at Calvin College.
+;; Completed by: Quentin Barnes
+;; Date: May 6, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns find)
+
+(load "listOps")                      ; load module
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Function -main tests function listSearch(). 
+;; Output: the results of testing listSearch() on various lists.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn -main []
+  (let
+    [ 
+      list1 '(99 88 77 66 55)        ; 99 is first value
+      list2 (list 55 66 77 88 99)    ; 99 is last value
+      list3 (list 55 77 99 88 66)    ; 99 is middle value
+      list4 (list 55 77 45 88 66)    ; 99 doesnt exist
+    ]
+
+    (println)
+    (println "list1: " list1)        ; print list1,
+    (println "list2: " list2)        ;   list2,
+    (println "list3: " list3)        ;   list3,
+    (println "list4: " list4)        ;   list4,
+    (println)                        ;   and their search
+    (println "The position of 99 in list1 is: " (listSearch list1 99 0))
+    (println "The position of 99 in list2 is: " (listSearch list2 99 0))
+    (println "The position of 99 in list3 is: " (listSearch list3 99 0))
+    (println "The position of 99 in list4 is: " (listSearch list4 99 0))
+    (println)
+  )
+)
+
+qmb2@gold29:~/Desktop/GitStuff/Git 363/CS-214/projects/09/clojure$ cat src/listOps.clj 
+;; listOps.clj is a Clojure "module" for list operations.
+;;
+;; Begun by: Prof. Adams, CS 214 at Calvin College.
+;; Completed by: Quentin Barnes
+;; Date: May 6, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; maxOf2() finds the maximum of two values.  
+;; Receive: val1, val2, two values.  
+;; PRE: val1 and val2 can be compared using >.
+;; Return: the maximum of val1 and val2. 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn maxOf2 [val1 val2]
+  (if (> val1 val2)      ; if val1 > val2
+    val1                 ;   return val1
+    val2                 ; else return val2
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; listMax() finds the maximum value in a list.
+;; Receive: aList, a list of values.    
+;; PRE: aList is a list 
+;;      values in aList can be compared using >.
+;; Return: the maximum value in aList.         
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn listMax [aList]
+  (if (list? aList)
+    (if (< (count aList) 1)
+      nil
+      (let
+        [ firstVal (first aList)]
+        (if (= (count aList) 1)
+          firstVal
+          (maxOf2 firstVal (listMax (rest aList)))
+        )
+      )
+    )
+    nil
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; listSearch() finds the position of a value in a list.
+;; Receive: aList, a list of values. aVal, an Integer to find. currentPos, an Integer
+;; PRE: aList is a list 
+;; Return: the position of a value in aList.         
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn listSearch [aList aVal currentPos]
+  (if (list? aList)
+    (if (< (count aList) 1)
+      -1
+      (let
+        [ firstVal (first aList)]
+        (if (= firstVal aVal)
+          currentPos
+          (listSearch (rest aList) aVal (+ currentPos 1))
+        )
+      )
+    )
+    nil
+  )
+)
+
+;; using Clojure's built-in max and apply functions
+(defn listMax2 [aList]
+  (if (list? aList)       ; if aList is a list:
+    (if (empty? aList)    ;  if aList is empty:
+      nil                 ;    nil
+      (apply max aList)   ;  else apply max to 
+    )                     ;        the items in aList
+  )
+)
+qmb2@gold29:~/Desktop/GitStuff/Git 363/CS-214/projects/09/clojure$ make
+clojure -m find
+
+list1:  (99 88 77 66 55)
+list2:  (55 66 77 88 99)
+list3:  (55 77 99 88 66)
+list4:  (55 77 45 88 66)
+
+The position of 99 in list1 is:  0
+The position of 99 in list2 is:  4
+The position of 99 in list3 is:  2
+The position of 99 in list4 is:  -1
+
+qmb2@gold29:~/Desktop/GitStuff/Git 363/CS-214/projects/09/clojure$ exit
+
+Script done on Mon 06 May 2019 11:29:56 PM EDT

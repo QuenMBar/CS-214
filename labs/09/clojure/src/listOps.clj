@@ -1,8 +1,8 @@
 ;; listOps.clj is a Clojure "module" for list operations.
 ;;
 ;; Begun by: Prof. Adams, CS 214 at Calvin College.
-;; Completed by:
-;; Date:
+;; Completed by: Quentin Barnes
+;; Date: May 6, 2019
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -27,4 +27,28 @@
 ;; Return: the maximum value in aList.         
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defn listMax [aList]
+  (if (list? aList)
+    (if (< (count aList) 1)
+      nil
+      (let
+        [ firstVal (first aList)]
+        (if (= (count aList) 1)
+          firstVal
+          (maxOf2 firstVal (listMax (rest aList)))
+        )
+      )
+    )
+    nil
+  )
+)
 
+;; using Clojure's built-in max and apply functions
+(defn listMax2 [aList]
+  (if (list? aList)       ; if aList is a list:
+    (if (empty? aList)    ;  if aList is empty:
+      nil                 ;    nil
+      (apply max aList)   ;  else apply max to 
+    )                     ;        the items in aList
+  )
+)

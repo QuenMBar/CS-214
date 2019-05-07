@@ -74,6 +74,23 @@ class List
       return maxValue
    end
 
+   # find an item
+   # Return: position of item
+
+   def search(aValue)
+      temp = @first
+      position = -1
+      currentPos = 0
+      while !temp.nil?
+         if temp.value == aValue
+            position = currentPos
+         end
+         currentPos = currentPos + 1
+         temp = temp.next
+      end
+      return position
+   end
+
 
    class Node 
       def initialize(item, link)

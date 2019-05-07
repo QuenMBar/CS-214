@@ -6,8 +6,8 @@
 ;; Usage: clojure -m max
 ;;
 ;; Begun by: Dr. Adams, CS 214 at Calvin College.
-;; Completed by:
-;; Date:
+;; Completed by: Quentin Barnes
+;; Date: May 6, 2019
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (ns max)
@@ -33,12 +33,18 @@
     (println "list3: " list3)        ;   list3,
     (println "empty: " emptyList)    ;   list3,
     (println)                        ;   and their maxima
-;    (println "The max value in list1 is: " (listMax list1))
-;    (println "The max value in list2 is: " (listMax list2))
-;    (println "The max value in list3 is: " (listMax list3))
-;    (println)
-;    (println "The max of an empty list is: " (listMax emptyList))
-;    (println)
+    (println "The max value in list1 is: " (listMax list1))
+    (println "The max value in list2 is: " (listMax list2))
+    (println "The max value in list3 is: " (listMax list3))
+    (println)
+    (println "The max of an empty list is: " (listMax emptyList))
+    (println)
+    (println "The max value in list1 using listMax2 is: " (listMax2 list1))
+    (println "The max value in list2 using listMax2 is: " (listMax2 list2))
+    (println "The max value in list3 using listMax2 is: " (listMax2 list3))
+    (println)
+    (println "The max of an empty list using listMax2 is: " (listMax2 emptyList))
+    (println)
   )
 )
 

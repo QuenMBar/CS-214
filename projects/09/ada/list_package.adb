@@ -103,5 +103,27 @@ package body List_Package is
 
   end Max;
 
+  ------------------------------------------------
+  -- Find the position of a value in a list.     -
+  -- Receive: aList, a List. A_Value, a Integer  -
+  -- Return: the position of a value in aList.   -
+  ------------------------------------------------
+
+  function Search(A_List : in List; A_Value : in Integer) return Integer is
+    Temp_Ptr : Node_Ptr := A_List.Its_First;
+    Position : Integer := -1;
+    CurrentPos : Integer := 0;
+  begin
+    while Temp_Ptr /= null loop
+        if Temp_Ptr.Its_Value = A_Value then
+          Position := CurrentPos;
+        end if;
+        CurrentPos := CurrentPos + 1;
+        Temp_Ptr := Temp_Ptr.Its_Next;
+     end loop;
+
+     return Position;
+  end Search;
+
 end List_Package;
 

@@ -9,7 +9,7 @@
 (load "Bird")
 
 ;; define 'Duck' as 'subclass' of Bird
-(defrecord Duck [^Bird name] )
+(defrecord Duck [^Bird name movement] )
 
 ;;; constructors
 ;;; - default: takes no arguments
@@ -19,8 +19,8 @@
 ;;;   Postcondition: name == itsName
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn make-Duck
-  ([]                (->Duck "Ann Onymous"))
-  ([^String itsName] (->Duck itsName))
+  ([]                (->Duck "Ann Onymous" "flew past"))
+  ([^String itsName] (->Duck itsName "flew past"))
 )
 
 ;;; method to retrieve a Duck's class
@@ -38,4 +38,3 @@
 (defmethod getCall Duck [ _ ]
   "Quack!"
 )
-

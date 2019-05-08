@@ -1,6 +1,6 @@
--- duck_package.ads gives Duck-related declarations,
+-- WalkingBird_Package.ads gives WalkingBird-related declarations,
 --
---  and derives Duck from Bird.
+--  and derives WalkingBird from Bird.
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: Quentin Barnes
 -- Date: May 7, 2019

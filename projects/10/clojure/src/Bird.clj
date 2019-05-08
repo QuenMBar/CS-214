@@ -7,7 +7,7 @@
 
 ;; Define a Bird 'class' with one attribute, the Bird's name.
 ;(defrecord Bird [name])
-(defrecord Bird [name])
+(defrecord Bird [name movement])
 
 ;;; Bird constructors
 ;;; - default: no args
@@ -18,8 +18,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn make-Bird
-  ([]        (->Bird "Ann Onymous"))
-  ([itsName] (->Bird itsName))
+  ([]        (->Bird "Ann Onymous" "came by"))
+  ([itsName] (->Bird itsName "came by"))
 )
 
 
@@ -30,6 +30,10 @@
 
 (defn getName [^Bird this]
   (:name this)
+)
+
+(defn getMovement [^Bird this]
+  (:movement this)
 )
 
 
@@ -72,5 +76,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defmethod toString :default [aBird]
-  (str (getName aBird) " " (getClass aBird) " says, \"" (getCall aBird) "\"")
+  (str (getName aBird) " " (getClass aBird) " just " (getMovement aBird) " and said, \"" (getCall aBird) "\"")
 )

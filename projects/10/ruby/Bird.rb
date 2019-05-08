@@ -18,12 +18,16 @@ class Bird
     'Squaaaaaaawk!'
   end
 
+  def movement
+    'came by'
+  end
+
   def className
     self.class.to_s
   end
 
   def print
-    puts name + " " + className + " says " + call
+    puts name + " " + className + " just " + movement + " and said " + call
   end
   
 end

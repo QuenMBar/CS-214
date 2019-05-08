@@ -1,6 +1,6 @@
--- duck_package.ads gives Duck-related declarations,
+-- FlyingBird_package.ads gives FlyingBird-related declarations,
 --
---  and derives Duck from Bird.
+--  and derives FlyingBird from Bird.
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: Quentin Barnes
 -- Date: May 7, 2019

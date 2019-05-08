@@ -6,9 +6,9 @@
 # Date: May 07, 2019
 ####################################################
 
-require './Bird.rb'
+require './FlyingBird.rb'
 
-class Goose < Bird
+class Goose < FlyingBird
 
     def call
         'Honk!'

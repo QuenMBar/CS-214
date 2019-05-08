@@ -43,7 +43,7 @@ public class Bird {
   }
 
   /*
-   * A Bird's Call Return: a default bird-call ("Squawk!").
+   * A Bird's Call Return: a default bird-movement ("came by").
    */
 
   public String getMovement() {

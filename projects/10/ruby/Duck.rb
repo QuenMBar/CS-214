@@ -6,9 +6,9 @@
 # Date: May 07, 2019
 ####################################################
 
-require './Bird.rb'
+require './FlyingBird.rb'
 
-class Duck < Bird
+class Duck < FlyingBird
 
     def call
         'Quack!'

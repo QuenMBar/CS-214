@@ -1,0 +1,490 @@
+Script started on Wed 08 May 2019 04:57:07 PM EDT
+qmb2@gold22:~/Desktop/GitStuff/Git 363/CS-214/projects/10/clojure$ cat src/birds..clj 
+;; birds.clj illustrates inheritance and polymorphism in Clojure.
+;;
+;; Output: the results of testing the Bird functions.
+;;
+;; Usage: clojure -m birds
+;;
+;; Begun by: Prof. Adams, for CS 214 Lab 10 at Calvin College.
+;;;; Completed by: Quentin Barnes
+;;;; Date: May 7, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns birds
+  (:require
+    [Bird]
+    [Duck]
+    [Goose]
+    [Owl]
+    [Penguin]
+    [Ostrich]
+    [Kiwi]
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Function -main tests the classes in the Bird hierarchy.
+;;; Output: the results of testing the Bird functions.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn -main []
+  (let
+    [                              ;; Birds
+     bird0 (make-Bird)            ; default Bird constructor
+     bird1 (make-Bird "Hawkeye")  ; explicit Bird constructor
+                                   ;; Ducks
+     bird2 (make-Duck)            ; default Duck constructor
+     bird3 (make-Duck  "Donald")  ; explicit Duck constructor
+                                   ;; Geese
+     bird4 (make-Goose)           ; default Goose constructor
+     bird5 (make-Goose "Mother")  ; explicit Goose constructor
+                                   ;; Owls
+     bird6 (make-Owl)             ; default Owl constructor
+     bird7 (make-Owl "Woodsey")   ; explicit Owl constructor
+
+     bird8 (make-Ostrich)             ; default Owl constructor
+     bird9 (make-Ostrich "Orville")   ; explicit Owl constructor
+
+     bird10 (make-Kiwi)             ; default Owl constructor
+     bird11 (make-Kiwi "Kevin")   ; explicit Owl constructor
+
+     bird12 (make-Penguin)             ; default Owl constructor
+     bird13 (make-Penguin "Peter")   ; explicit Owl constructor
+    ]
+
+    (println "\nWelcome to the Bird Park!\n")
+    (println (toString bird0))
+    (println (toString bird1))
+    (println)
+    (println (toString bird2))
+    (println (toString bird3))
+    (println)
+    (println (toString bird4))
+    (println (toString bird5))
+    (println)
+    (println (toString bird6))
+    (println (toString bird7))
+    (println)
+    (println (toString bird8))
+    (println (toString bird9))
+    (println)
+    (println (toString bird10))
+    (println (toString bird11))
+    (println)
+    (println (toString bird12))
+    (println (toString bird13))
+    (println)
+    (println "Goodbye, and come again!\n")
+    (println)
+  )
+)
+ 
+qmb2@gold22:~/Desktop/GitStuff/Git 363/CS-214/projects/10/clojure$ cat src/Bird.cclj 
+;;;; Bird.clj provides a Bird "class".
+;;;; 
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: Quentin Barnes
+;;;; Date: May 7, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Define a Bird 'class' with one attribute, the Bird's name.
+;(defrecord Bird [name])
+(defrecord Bird [name movement])
+
+;;; Bird constructors
+;;; - default: no args
+;;;   Postcondition: name == a default value.
+;;; - explicit:
+;;;   Receive: itsName, a String.
+;;;   Postcondition: name == itsName.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn make-Bird
+  ([]        (->Bird "Ann Onymous" "came by"))
+  ([itsName] (->Bird itsName "came by"))
+)
+
+
+;;; accessor method for name attribute
+;;; Receive: this, a Bird object.
+;;; Return: this's name.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn getName [^Bird this]
+  (:name this)
+)
+
+(defn getMovement [^Bird this]
+  (:movement this)
+)
+
+
+;; define getClass, getCall, and toString as polymorphic methods
+;; Note: these must be defined using defmethod instead of defn.
+
+(defmulti getClass class)
+(defmulti getCall  class)
+(defmulti toString class)
+
+
+;;; method to retrieve a Bird's class
+;;; Receive: this, a Bird object.
+;;; Return: "Bird".
+;;; Note: 'subclasses' of Bird must define this method.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod getClass Bird [ _ ]
+  "Bird"
+)
+
+
+;;; method to retrieve a Bird's call
+;;; Receive: this, a Bird object.
+;;; Return: a default bird-call.
+;;; Note: 'subclasses' of Bird must define this method.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod  getCall :default [ _ ]
+   "Squaaaaawk!"
+)
+
+
+;;; method to combine a Bird, its class and its call into a String.
+;;; Receive: this, a Bird object.
+;;; Return: a String representing this, its class, and its call.
+;;; Note: getClass and getCall are polymorphic methods.
+;;; Note also: the use of :default for its class means that
+;;;        'subclasses' may but are not required to define it.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod toString :default [aBird]
+  (str (getName aBird) " " (getClass aBird) " just " (getMovement aBird) " and said, \"" (getCall aBird) "\"")
+)
+qmb2@gold22:~/Desktop/GitStuff/Git 363/CS-214/projects/10/clojure$ cat src/d Duck.cclj 
+;;;; Duck.clj provides a Duck "class".
+;;;; 
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: Quentin Barnes
+;;;; Date: May 7, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; bring in 'Bird' (to be used as superclass) 
+(load "Bird")
+
+;; define 'Duck' as 'subclass' of Bird
+(defrecord Duck [^Bird name movement] )
+
+;;; constructors
+;;; - default: takes no arguments
+;;;   Postcondition: name is initialized to a default value
+;;; - explicit: takes one parameter
+;;;   Receive: itsName, a String
+;;;   Postcondition: name == itsName
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn make-Duck
+  ([]                (->Duck "Ann Onymous" "flew past"))
+  ([^String itsName] (->Duck itsName "flew past"))
+)
+
+;;; method to retrieve a Duck's class
+;;; Receive: this, a Duck object.
+;;; Return: "Duck"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defmethod getClass Duck [ _ ]
+  "Duck"
+)
+
+;;; method to retrieve a Duck's call
+;;; Receive: this, a Duck object.
+;;; Return: "Quack!"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defmethod getCall Duck [ _ ]
+  "Quack!"
+)qmb2@gold22:~/Desktop/GitStuff/Git 363/CS-214/projects/10/clojure$ cat src/Owl.cllj 
+;;;; Owl.clj provides an Owl "class".
+;;;; 
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: Quentin Barnes
+;;;; Date: May 7, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ 
+
+;; bring in 'Bird' (to be used as 'superclass')
+
+(load "Bird")
+
+
+;; define 'Owl' as 'subclass' of Bird
+
+(defrecord Owl [^Bird name movement] )
+
+
+;;; Owl constructors
+;;; - default: no args
+;;;   Postcondition: name == a default value. 
+;;; - explicit1:
+;;;   Receive: itsName, a String
+;;;   Postcondition: name == itsName.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn make-Owl     
+  ([]                (->Owl "Ann Onymous" "flew past"))
+  ([^String itsName] (->Owl itsName "flew past"))
+)
+
+
+;;; method to retrieve a Owl's class
+;;; Receive: this, a Owl object.
+;;; Return: "Owl".
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod getClass Owl [ _ ]
+  "Owl"
+)
+
+;;; method to retrieve a Owl's call
+;;; Receive: this, a Owl object.
+;;; Return: "Whoo-hoo!"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod getCall Owl [ _ ]
+  "Whoo-hoo!"
+)
+
+
+qmb2@gold22:~/Desktop/GitStuff/Git 363/CS-214/projects/10/clojure$ cat src/Goose..clj 
+;;;; Goose.clj provides a Goose "class".
+;;;; 
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: Quentin Barnes
+;;;; Date: May 7, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; bring in 'Bird' (to be used as 'superclass')
+
+(load "Bird")
+
+
+;; define 'Goose' as 'subclass' of Bird
+
+(defrecord Goose [^Bird name movement] )
+
+
+;;; Goose constructors
+;;; - default: no args
+;;;   Postcondition: name == a default value. 
+;;; - explicit1:
+;;;   Receive: itsName, a String
+;;;   Postcondition: name == itsName.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn make-Goose     
+  ([]                (->Goose "Ann Onymous" "flew past"))
+  ([^String itsName] (->Goose itsName "flew past"))
+)
+
+
+;;; method to retrieve a Goose's class
+;;; Receive: this, a Goose object.
+;;; Return: "Goose".
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod getClass Goose [ _ ]
+  "Goose"
+)
+
+;;; method to retrieve a Goose's call
+;;; Receive: this, a Goose object.
+;;; Return: "Honk!"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod getCall Goose [ _ ]
+  "Honk!"
+)
+
+qmb2@gold22:~/Desktop/GitStuff/Git 363/CS-214/projects/10/clojure$ cat src  /Ostricch.clj 
+;;;; Ostrich.clj provides an Ostrich "class".
+;;;; 
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: Quentin Barnes
+;;;; Date: May 7, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ 
+
+;; bring in 'Bird' (to be used as 'superclass')
+
+(load "Bird")
+
+
+;; define 'Ostrich' as 'subclass' of Bird
+
+(defrecord Ostrich [^Bird name movement] )
+
+
+;;; Ostrich constructors
+;;; - default: no args
+;;;   Postcondition: name == a default value. 
+;;; - explicit1:
+;;;   Receive: itsName, a String
+;;;   Postcondition: name == itsName.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn make-Ostrich     
+  ([]                (->Ostrich "Ann Onymous" "walked past"))
+  ([^String itsName] (->Ostrich itsName "walked past"))
+)
+
+
+;;; method to retrieve a Ostrich's class
+;;; Receive: this, a Ostrich object.
+;;; Return: "Ostrich".
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod getClass Ostrich [ _ ]
+  "Ostrich"
+)
+
+;;; method to retrieve a Ostrich's call
+;;; Receive: this, a Ostrich object.
+;;; Return: "Whoo-hoo!"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod getCall Ostrich [ _ ]
+  "Snork!"
+)
+
+qmb2@gold22:~/Desktop/GitStuff/Git 363/CS-214/projects/10/clojure$ cat src/Penguiin.clj 
+;;;; Penguin.clj provides an Penguin "class".
+;;;; 
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: Quentin Barnes
+;;;; Date: May 7, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ 
+
+;; bring in 'Bird' (to be used as 'superclass')
+
+(load "Bird")
+
+
+;; define 'Penguin' as 'subclass' of Bird
+
+(defrecord Penguin [^Bird name movement] )
+
+
+;;; Penguin constructors
+;;; - default: no args
+;;;   Postcondition: name == a default value. 
+;;; - explicit1:
+;;;   Receive: itsName, a String
+;;;   Postcondition: name == itsName.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn make-Penguin     
+  ([]                (->Penguin "Ann Onymous" "walked past"))
+  ([^String itsName] (->Penguin itsName "walked past"))
+)
+
+
+;;; method to retrieve a Penguin's class
+;;; Receive: this, a Penguin object.
+;;; Return: "Penguin".
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod getClass Penguin [ _ ]
+  "Penguin"
+)
+
+;;; method to retrieve a Penguin's call
+;;; Receive: this, a Penguin object.
+;;; Return: "Whoo-hoo!"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod getCall Penguin [ _ ]
+  "Huh-huh-huh-huuuuh!"
+)
+
+
+qmb2@gold22:~/Desktop/GitStuff/Git 363/CS-214/projects/10/clojure$ cat src  /Kiwi.cclj 
+;;;; Kiwi.clj provides an Kiwi "class".
+;;;; 
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: Quentin Barnes
+;;;; Date: May 7, 2019
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ 
+
+;; bring in 'Bird' (to be used as 'superclass')
+
+(load "Bird")
+
+
+;; define 'Kiwi' as 'subclass' of Bird
+
+(defrecord Kiwi [^Bird name movement] )
+
+
+;;; Kiwi constructors
+;;; - default: no args
+;;;   Postcondition: name == a default value. 
+;;; - explicit1:
+;;;   Receive: itsName, a String
+;;;   Postcondition: name == itsName.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn make-Kiwi     
+  ([]                (->Kiwi "Ann Onymous" "walked past"))
+  ([^String itsName] (->Kiwi itsName "walked past"))
+)
+
+
+;;; method to retrieve a Kiwi's class
+;;; Receive: this, a Kiwi object.
+;;; Return: "Kiwi".
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod getClass Kiwi [ _ ]
+  "Kiwi"
+)
+
+;;; method to retrieve a Kiwi's call
+;;; Receive: this, a Kiwi object.
+;;; Return: "Whoo-hoo!"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmethod getCall Kiwi [ _ ]
+  "Screech!"
+)
+
+qmb2@gold22:~/Desktop/GitStuff/Git 363/CS-214/projects/10/clojure$ make
+clojure -m birds
+
+Welcome to the Bird Park!
+
+Ann Onymous Bird just came by and said, "Squaaaaawk!"
+Hawkeye Bird just came by and said, "Squaaaaawk!"
+
+Ann Onymous Duck just flew past and said, "Quack!"
+Donald Duck just flew past and said, "Quack!"
+
+Ann Onymous Goose just flew past and said, "Honk!"
+Mother Goose just flew past and said, "Honk!"
+
+Ann Onymous Owl just flew past and said, "Whoo-hoo!"
+Woodsey Owl just flew past and said, "Whoo-hoo!"
+
+Ann Onymous Ostrich just walked past and said, "Snork!"
+Orville Ostrich just walked past and said, "Snork!"
+
+Ann Onymous Kiwi just walked past and said, "Screech!"
+Kevin Kiwi just walked past and said, "Screech!"
+
+Ann Onymous Penguin just walked past and said, "Huh-huh-huh-huuuuh!"
+Peter Penguin just walked past and said, "Huh-huh-huh-huuuuh!"
+
+Goodbye, and come again!
+
+
+qmb2@gold22:~/Desktop/GitStuff/Git 363/CS-214/projects/10/clojure$ exit
+
+Script done on Wed 08 May 2019 04:58:14 PM EDT

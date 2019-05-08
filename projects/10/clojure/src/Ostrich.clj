@@ -1,21 +1,22 @@
-;;;; Goose.clj provides a Goose "class".
+;;;; Ostrich.clj provides an Ostrich "class".
 ;;;; 
 ;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
 ;;;; Completed by: Quentin Barnes
 ;;;; Date: May 7, 2019
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ 
 
 ;; bring in 'Bird' (to be used as 'superclass')
 
 (load "Bird")
 
 
-;; define 'Goose' as 'subclass' of Bird
+;; define 'Ostrich' as 'subclass' of Bird
 
-(defrecord Goose [^Bird name movement] )
+(defrecord Ostrich [^Bird name movement] )
 
 
-;;; Goose constructors
+;;; Ostrich constructors
 ;;; - default: no args
 ;;;   Postcondition: name == a default value. 
 ;;; - explicit1:
@@ -23,27 +24,27 @@
 ;;;   Postcondition: name == itsName.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn make-Goose     
-  ([]                (->Goose "Ann Onymous" "flew past"))
-  ([^String itsName] (->Goose itsName "flew past"))
+(defn make-Ostrich     
+  ([]                (->Ostrich "Ann Onymous" "walked past"))
+  ([^String itsName] (->Ostrich itsName "walked past"))
 )
 
 
-;;; method to retrieve a Goose's class
-;;; Receive: this, a Goose object.
-;;; Return: "Goose".
+;;; method to retrieve a Ostrich's class
+;;; Receive: this, a Ostrich object.
+;;; Return: "Ostrich".
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defmethod getClass Goose [ _ ]
-  "Goose"
+(defmethod getClass Ostrich [ _ ]
+  "Ostrich"
 )
 
-;;; method to retrieve a Goose's call
-;;; Receive: this, a Goose object.
-;;; Return: "Honk!"
+;;; method to retrieve a Ostrich's call
+;;; Receive: this, a Ostrich object.
+;;; Return: "Whoo-hoo!"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defmethod getCall Goose [ _ ]
-  "Honk!"
+(defmethod getCall Ostrich [ _ ]
+  "Snork!"
 )
 

@@ -1,4 +1,4 @@
--- duck_package.adb gives Duck-related definitions
+-- WalkingBird_package.adb gives WalkingBird-related definitions
 --  by over-riding Bird-related definitions.
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.

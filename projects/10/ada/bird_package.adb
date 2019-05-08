@@ -44,6 +44,11 @@ function Call(A_Bird : in Bird_Type) return String is
     return "Squawwwwwwk!";
    end Call;
 
+ ----------------------------------------------------
+ -- A Bird's Movement                               -
+ -- Receive: A_Bird, a Bird_Type.                   -
+ -- Return: a default bird-call ("come by").        -
+ ----------------------------------------------------
 function Movement(A_Bird : in Bird_Type) return String is
    begin
     return "came by";

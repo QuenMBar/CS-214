@@ -31,6 +31,11 @@ function  Name(A_Bird : in Bird_Type) return String;
  ----------------------------------------------------
 function  Call(A_Bird : in Bird_Type) return String;
 
+ ----------------------------------------------------
+ -- A Bird's Movement                               -
+ -- Receive: A_Bird, a Bird_Type.                   -
+ -- Return: a default bird-call ("come by").        -
+ ----------------------------------------------------
 function  Movement(A_Bird : in Bird_Type) return String;
 
  ----------------------------------------------------

@@ -1,3 +1,10 @@
+/* WalkingBird.java provides a WalkingBird subclass of Bird.
+ *
+ * Begun by: Prof. Adams, for CS 214 at Calvin College.
+ * Completed by: Quentin Barnes
+ * Date: May 7, 2019
+ ******************************************************/
+
 public class WalkingBird extends Bird {
 
     /*
@@ -13,7 +20,7 @@ public class WalkingBird extends Bird {
     }
 
     /*
-     * A Duck's Call Return: a duck-call ("Quack!").
+     * A WalkingBird's Call Return: a WalkingBird-call ("walked past!").
      */
 
     public String getMovement() {

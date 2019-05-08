@@ -9,6 +9,9 @@ require './Bird.rb'
 require './Duck.rb'
 require './Goose.rb'
 require './Owl.rb'
+require './Ostrich.rb'
+require './Penguin.rb'
+require './Kiwi.rb'
 
 puts "\nWelcome to the Bird Park!\n\n"
 
@@ -23,5 +26,14 @@ bird2.print
 
 bird3 = Owl.new "Woodsey"
 bird3.print
+
+bird4 = Ostrich.new "Orville"
+bird4.print
+
+bird5 = Penguin.new "Peter"
+bird5.print
+
+bird6 = Kiwi.new "Kevin"
+bird6.print
 
 puts "\n\n"

@@ -13,7 +13,7 @@
 
 ;; define 'Owl' as 'subclass' of Bird
 
-(defrecord Owl [^Bird name] )
+(defrecord Owl [^Bird name movement] )
 
 
 ;;; Owl constructors
@@ -25,8 +25,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn make-Owl     
-  ([]                (->Owl "Ann Onymous"))
-  ([^String itsName] (->Owl itsName))
+  ([]                (->Owl "Ann Onymous" "flew past"))
+  ([^String itsName] (->Owl itsName "flew past"))
 )
 
 
@@ -47,4 +47,5 @@
 (defmethod getCall Owl [ _ ]
   "Whoo-hoo!"
 )
+
 

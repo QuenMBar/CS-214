@@ -15,6 +15,9 @@
     [Duck]
     [Goose]
     [Owl]
+    [Penguin]
+    [Ostrich]
+    [Kiwi]
   )
 )
 
@@ -36,6 +39,15 @@
                                    ;; Owls
      bird6 (make-Owl)             ; default Owl constructor
      bird7 (make-Owl "Woodsey")   ; explicit Owl constructor
+
+     bird8 (make-Ostrich)             ; default Owl constructor
+     bird9 (make-Ostrich "Orville")   ; explicit Owl constructor
+
+     bird10 (make-Kiwi)             ; default Owl constructor
+     bird11 (make-Kiwi "Kevin")   ; explicit Owl constructor
+
+     bird12 (make-Penguin)             ; default Owl constructor
+     bird13 (make-Penguin "Peter")   ; explicit Owl constructor
     ]
 
     (println "\nWelcome to the Bird Park!\n")
@@ -50,6 +62,15 @@
     (println)
     (println (toString bird6))
     (println (toString bird7))
+    (println)
+    (println (toString bird8))
+    (println (toString bird9))
+    (println)
+    (println (toString bird10))
+    (println (toString bird11))
+    (println)
+    (println (toString bird12))
+    (println (toString bird13))
     (println)
     (println "Goodbye, and come again!\n")
     (println)

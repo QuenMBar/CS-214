@@ -1,4 +1,4 @@
-# Owl.rb | Defines the Owl class which inherits attributes and methods
+# Penguin.rb | Defines the Penguin class which inherits attributes and methods
 #   from the Bird superclass.
 #
 # Begun by: Dr. Adams, for CS 214 at Calvin College.
@@ -6,12 +6,12 @@
 # Date: May 07, 2019
 ####################################################
 
-require './FlyingBird.rb'
+require './WalkingBird.rb'
 
-class Owl < FlyingBird
+class Penguin < WalkingBird
 
     def call
-        'Whoo-hoo!'
+        'Huh-huh-huh-huuuuh!'
     end
 
 end

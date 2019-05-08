@@ -23,6 +23,15 @@ public class Birds {
 
     Owl bird4 = new Owl("Woodsey");
     bird4.print();
+
+    Penguin bird5 = new Penguin("Peter");
+    bird5.print();
+
+    Ostrich bird6 = new Ostrich("Orville");
+    bird6.print();
+
+    Kiwi bird7 = new Kiwi("Kevin");
+    bird7.print();
     System.out.println();
   }
 }

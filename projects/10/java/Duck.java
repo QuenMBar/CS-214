@@ -5,7 +5,7 @@
  * Date: May 7, 2019
  ******************************************************/
 
-public class Duck extends Bird {
+public class Duck extends FlyingBird {
 
   /*
    * explicit constructor Receive: name, a String PostCond: myName == name.

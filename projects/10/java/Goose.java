@@ -1,30 +1,29 @@
-/* Duck.java provides a Duck subclass of Bird.
+/* Goose.java provides a Goose subclass of Bird.
  *
  * Begun by: Prof. Adams, for CS 214 at Calvin College.
  * Completed by: Quentin Barnes
  * Date: May 7, 2019
  ******************************************************/
 
-public class Duck extends Bird {
+public class Goose extends FlyingBird {
 
   /*
    * explicit constructor Receive: name, a String PostCond: myName == name.
    */
-
-  public Duck() {
+  public Goose() {
     super();
   }
 
-  public Duck(String name) {
+  public Goose(String name) {
     super(name);
   }
 
   /*
-   * A Duck's Call Return: a duck-call ("Quack!").
+   * A Goose's Call Return: a goose-call ("Honk!").
    */
 
   public String call() {
-    return "Quack!";
+    return "Honk!";
   }
 
 }

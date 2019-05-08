@@ -1,30 +1,30 @@
-/* Duck.java provides a Duck subclass of Bird.
+/* Kiwi.java provides a Kiwi subclass of Bird.
  *
  * Begun by: Prof. Adams, for CS 214 at Calvin College.
  * Completed by: Quentin Barnes
  * Date: May 7, 2019
  ******************************************************/
 
-public class Duck extends Bird {
+public class Kiwi extends WalkingBird {
 
   /*
    * explicit constructor Receive: name, a String PostCond: myName == name.
    */
 
-  public Duck() {
+  public Kiwi() {
     super();
   }
 
-  public Duck(String name) {
+  public Kiwi(String name) {
     super(name);
   }
 
   /*
-   * A Duck's Call Return: a duck-call ("Quack!").
+   * A Kiwi's Call Return: a Kiwi-call ("Quack!").
    */
 
   public String call() {
-    return "Quack!";
+    return "Screech!";
   }
 
 }

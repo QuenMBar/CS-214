@@ -1,30 +1,30 @@
-/* Duck.java provides a Duck subclass of Bird.
+/* Owl.java provides an Owl subclass of Bird.
  *
  * Begun by: Prof. Adams, for CS 214 at Calvin College.
  * Completed by: Quentin Barnes
  * Date: May 7, 2019
  ******************************************************/
 
-public class Duck extends Bird {
+public class Owl extends FlyingBird {
 
   /*
    * explicit constructor Receive: name, a String PostCond: myName == name.
    */
 
-  public Duck() {
+  public Owl() {
     super();
   }
 
-  public Duck(String name) {
+  public Owl(String name) {
     super(name);
   }
 
   /*
-   * A Duck's Call Return: a duck-call ("Quack!").
+   * An Owl's Call Return: an owl-call ("Whoo-hoo!").
    */
 
   public String call() {
-    return "Quack!";
+    return "Whoo-hoo!";
   }
 
 }

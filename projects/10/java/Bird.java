@@ -43,12 +43,20 @@ public class Bird {
   }
 
   /*
+   * A Bird's Call Return: a default bird-call ("Squawk!").
+   */
+
+  public String getMovement() {
+    return "came by";
+  }
+
+  /*
    * Output a Bird Output: Everything known about myself to the standard output
    * stream.
    */
 
   public void print() {
-    System.out.println(getName() + ' ' + getClass().getName() + " says " + call());
+    System.out.println(getName() + ' ' + getClass().getName() + " just " + getMovement() + " and said " + call());
   }
 
   private String myName;

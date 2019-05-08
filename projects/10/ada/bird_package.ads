@@ -1,72 +1,56 @@
--- bird_package.adb gives Bird-related definitions
+-- bird_package.ads gives Bird-related declarations
 --
--- Begun by: Dr. Adams, CS 214 at Calvin College.
+-- Begun by: Dr. Adams, for CS 214 at Calvin College.
 -- Completed by: Quentin Barnes
 -- Date: May 7, 2019
 ---------------------------------------------------
 
-with Ada.Text_IO;
-use Ada.Text_IO;
-
-package body Bird_Package is
-
+package Bird_Package is
+    type Bird_Type is tagged private;
 
  ----------------------------------------------------
  -- initialization                                  -
  -- Receive: A_Bird, a Bird_Type;                   -
  --          Name, a String                         -
- -- Return: a Bird_Type in which My_Name = Name.    -
+ -- Return: a Bird_Type whose My_Name = Name.       -
  ----------------------------------------------------
 
- procedure Init(A_Bird : out Bird_Type; Name : in String) is
-   begin
-    A_Bird.My_Name := Name;
-   end Init;
+ procedure Init(A_Bird : out Bird_Type; Name : in String);
 
  ----------------------------------------------------
  -- Name accessor                                   -
  -- Receive: A_Bird, a Bird_Type.                   -
  -- Return: A_Bird.My_Name.                         -
  ----------------------------------------------------
-
- function Name(A_Bird : in Bird_Type) return String is
-   begin
-    return A_Bird.My_Name;
-   end Name;
+function  Name(A_Bird : in Bird_Type) return String;
 
  ----------------------------------------------------
  -- A Bird's Call                                   -
  -- Receive: A_Bird, a Bird_Type.                   -
  -- Return: a default bird-call ("Squawk!").        -
  ----------------------------------------------------
-function Call(A_Bird : in Bird_Type) return String is
-   begin
-    return "Squawwwwwwk!";
-   end Call;
+function  Call(A_Bird : in Bird_Type) return String;
+
+function  Movement(A_Bird : in Bird_Type) return String;
 
  ----------------------------------------------------
  -- Determine type of a Bird (for derived types)    -
  -- Receive: A_Bird, a Bird_Type.                   -
  -- Return: "Bird".                                 -
  ----------------------------------------------------
- function Type_Name(A_Bird : in Bird_Type) return String is
-   begin
-    return "Bird";
-   end Type_Name;
+function  Type_Name(A_Bird : in Bird_Type) return String;
 
  ----------------------------------------------------
  -- Output a Bird                                   -
  -- Receive: A_Bird, a Bird or subclass of Bird.    -
  -- Output: Everything known about A_Bird           -
  ----------------------------------------------------
- procedure Put(A_Bird : in Bird_Type'Class) is
-   begin
-    Put( Name(A_Bird) );
-    Put( ' ' );
-    Put( Type_Name(A_Bird) );
-    Put( " says " );
-    Put( Call(A_Bird) );
-   end Put; 
+procedure Put(A_Bird : in Bird_Type'Class);
+
+private
+    type Bird_Type is
+        tagged record
+            My_Name : String(1..6);
+        end record;
 
 end Bird_Package;
-

@@ -1,8 +1,8 @@
 ;;;; Duck.clj provides a Duck "class".
 ;;;; 
 ;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
-;;;; Completed by:
-;;;; Date:
+;;;; Completed by: Quentin Barnes
+;;;; Date: May 7, 2019
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; bring in 'Bird' (to be used as superclass) 

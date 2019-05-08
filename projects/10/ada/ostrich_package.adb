@@ -1,4 +1,4 @@
--- owl_package.adb gives Owl-related definitions
+-- ostrich_package.adb gives Ostrich-related definitions
 --  by over-riding Bird-related definitions.
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
@@ -6,28 +6,28 @@
 -- Date: May 7, 2019
 ---------------------------------------------------
 
-package body Owl_Package is
+package body Ostrich_Package is
 
 
  ----------------------------------------------------
- -- A Owl's Call (Over-rides Bird.Call())           -
- -- Receive: An_Owl, an Owl_Type.                   -
+ -- A Ostrich's Call (Over-rides Bird.Call())           -
+ -- Receive: An_Ostrich, an Ostrich_Type.                   -
  -- Return: "Whoo!"                                 -
  ----------------------------------------------------
-function Call(A_Owl : in Owl_Type) return String is
+function Call(A_Ostrich : in Ostrich_Type) return String is
     begin
-     return "Whoo-hoo!";
+     return "Snork!";
     end Call;
 
  -----------------------------------------------------
- -- Determine type of a Owl                          -
+ -- Determine type of a Ostrich                          -
  -- (Over-rides Bird.Type_Name())                    -
- -- Receive: An_Owl, an Owl_Type.                    -
- -- Return: "Owl".                                   -
+ -- Receive: An_Ostrich, an Ostrich_Type.                    -
+ -- Return: "Ostrich".                                   -
  -----------------------------------------------------
- function Type_Name(A_Owl : in Owl_Type) return String is
+ function Type_Name(A_Ostrich : in Ostrich_Type) return String is
     begin
-     return "Owl";
+     return "Ostrich";
     end Type_Name;
 
-end Owl_Package;
+end Ostrich_Package;

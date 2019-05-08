@@ -44,6 +44,11 @@ function Call(A_Bird : in Bird_Type) return String is
     return "Squawwwwwwk!";
    end Call;
 
+function Movement(A_Bird : in Bird_Type) return String is
+   begin
+    return "came by";
+   end Movement;
+
  ----------------------------------------------------
  -- Determine type of a Bird (for derived types)    -
  -- Receive: A_Bird, a Bird_Type.                   -
@@ -64,7 +69,9 @@ function Call(A_Bird : in Bird_Type) return String is
     Put( Name(A_Bird) );
     Put( ' ' );
     Put( Type_Name(A_Bird) );
-    Put( " says " );
+    Put( " just " );
+    Put( Movement(A_Bird) );
+    Put( " and said " );
     Put( Call(A_Bird) );
    end Put; 
 

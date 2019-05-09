@@ -5,11 +5,11 @@
 -- Date: April 13, 2019
 ----------------------------------------------
 
-with Ada.Text_IO; with Name_Package; use Ada.Text_IO; use Name_Package;
+with Ada.Text_IO; with Tempature_Package; use Ada.Text_IO; use Tempature_Package;
 
 procedure name_tester is
 
-  aName : Name_Package.Name;
+  bas : Name_Package.Name;
 
 begin
    Init(aName, "John    ", "Paul    ", "Jones   ");

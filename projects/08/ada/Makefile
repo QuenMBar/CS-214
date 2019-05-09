@@ -1,7 +1,7 @@
 # Makefile for GNAT (Ada) compilation
 
-TARGET = name_tester
-PACKAGE = name_package
+TARGET = temp_tester
+PACKAGE = tempature_package
 
 CC = gcc
 CFLAGS = -c -gnata
